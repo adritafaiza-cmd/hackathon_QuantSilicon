@@ -225,6 +225,18 @@ allow_trade (1 bit)
 kill_switch (1 bit)
 ```
 
+
+## Streaming Interface Contract (Ready/Valid)
+
+All modules follow ready/valid handshake semantics.
+
+### Input Handshake
+A transaction is accepted when:
+
+```text
+in_valid && in_ready
+
+
 ---
 
 ## 9. Latency Target
@@ -277,5 +289,6 @@ W1 = 49152               (0.75 in Q16.16)
 W2 = 16384               (0.25 in Q16.16)
 
 LIMIT = 131072           (2.0 in Q16.16)
+
 
 
