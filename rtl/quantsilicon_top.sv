@@ -101,18 +101,13 @@ module quantsilicon_top (
             signal_buf_data <= 32'sd0;
         end else begin
             // Load buffer when signal output arrives and buffer is empty
-            if (sig_out_valid && !signal_buf_valid && !risk_buf_valid) begin
+            if (sig_out_valid && sig_out_ready && !signal_buf_valid) begin
                 signal_buf_valid <= 1'b1;
                 signal_buf_data <= sig_signal_out;
             end
             // Clear buffer when both branches ready and top consumes
             else if (signal_buf_valid && risk_buf_valid && out_ready) begin
                 signal_buf_valid <= 1'b0;
-            end
-            // Load immediately if risk already buffered and top not consuming
-            else if (sig_out_valid && risk_buf_valid && !out_ready) begin
-                signal_buf_valid <= 1'b1;
-                signal_buf_data <= sig_signal_out;
             end
         end
     end
@@ -125,7 +120,7 @@ module quantsilicon_top (
             risk_buf_kill <= 1'b0;
         end else begin
             // Load buffer when risk output arrives and buffer is empty
-            if (risk_out_valid && !risk_buf_valid && !signal_buf_valid) begin
+            if (risk_out_valid && risk_out_ready && !risk_buf_valid) begin
                 risk_buf_valid <= 1'b1;
                 risk_buf_allow <= risk_allow_trade;
                 risk_buf_kill <= risk_kill_switch;
@@ -134,31 +129,17 @@ module quantsilicon_top (
             else if (risk_buf_valid && signal_buf_valid && out_ready) begin
                 risk_buf_valid <= 1'b0;
             end
-            // Load immediately if signal already buffered and top not consuming
-            else if (risk_out_valid && signal_buf_valid && !out_ready) begin
-                risk_buf_valid <= 1'b1;
-                risk_buf_allow <= risk_allow_trade;
-                risk_buf_kill <= risk_kill_switch;
-            end
         end
     end
 
     // =========================================================================
     // Output Ready Signals to Submodules
     // =========================================================================
-    // Signal engine can advance when:
-    // - Both buffers will be full (transitioning to top out_valid), OR
-    // - Top is consuming and risk is also ready
-    assign sig_out_ready = (!signal_buf_valid && risk_out_valid) ||
-                           (!signal_buf_valid && risk_buf_valid) ||
-                           (signal_buf_valid && risk_buf_valid && out_ready);
+    // Each engine can advance when its buffer is empty or when top output is being consumed
+    assign sig_out_ready = !signal_buf_valid || (out_valid && out_ready);
 
-    // Risk engine can advance when:
-    // - Both buffers will be full (transitioning to top out_valid), OR
-    // - Top is consuming and signal is also ready
-    assign risk_out_ready = (!risk_buf_valid && sig_out_valid) ||
-                            (!risk_buf_valid && signal_buf_valid) ||
-                            (risk_buf_valid && signal_buf_valid && out_ready);
+    // Risk engine can advance when its buffer is empty or when top output is being consumed
+    assign risk_out_ready = !risk_buf_valid || (out_valid && out_ready);
 
     // =========================================================================
     // Top-Level Output Composition
