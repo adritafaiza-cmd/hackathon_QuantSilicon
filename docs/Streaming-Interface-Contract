@@ -1,0 +1,9 @@
+## Streaming Interface Contract (Ready/Valid)
+
+All modules follow ready/valid handshake semantics.
+
+### Input Handshake
+A transaction is accepted when:
+
+```text
+in_valid && in_ready
