@@ -1,0 +1,11 @@
+# DEPS.yml for QuantSilicon top-level simulation
+
+top_tb:
+  deps:
+    - rtl/fxp_pkg.sv
+    - feature_engine.sv
+    - signal_engine.sv
+    - risk_engine.sv
+    - quantsilicon_top.sv
+    - tb/top_tb.sv
+  top: top_tb
