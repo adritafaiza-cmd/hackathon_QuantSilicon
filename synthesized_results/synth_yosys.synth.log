@@ -1,0 +1,1612 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.53 (git sha1 53c22ab7c, g++ 13.3.0-6ubuntu2~24.04 -fPIC -O3)
+
+-- Executing script file `yosys.synth.f' --
+
+1. Executing Verilog-2005 frontend: /app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v
+Parsing SystemVerilog input from `/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v' to AST representation.
+Generating RTLIL representation for module `\feature_engine$top.u_feature_engine'.
+Generating RTLIL representation for module `\risk_engine$top.u_risk_engine'.
+Generating RTLIL representation for module `\signal_engine$top.u_signal_engine'.
+Generating RTLIL representation for module `\top'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `top'. Setting top module to top.
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \signal_engine$top.u_signal_engine
+Used module:     \risk_engine$top.u_risk_engine
+Used module:     \feature_engine$top.u_feature_engine
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \signal_engine$top.u_signal_engine
+Used module:     \risk_engine$top.u_risk_engine
+Used module:     \feature_engine$top.u_feature_engine
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:380$66 in module signal_engine$top.u_signal_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:376$64 in module signal_engine$top.u_signal_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:263$47 in module risk_engine$top.u_risk_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:259$45 in module risk_engine$top.u_risk_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:255$43 in module risk_engine$top.u_risk_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:115$19 in module feature_engine$top.u_feature_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:111$17 in module feature_engine$top.u_feature_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:107$15 in module feature_engine$top.u_feature_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:103$13 in module feature_engine$top.u_feature_engine.
+Marked 1 switch rules as full_case in process $proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:99$11 in module feature_engine$top.u_feature_engine.
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 10 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\signal_engine$top.u_signal_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:380$66'.
+Found async reset \rst_n in `\signal_engine$top.u_signal_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:376$64'.
+Found async reset \rst_n in `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:263$47'.
+Found async reset \rst_n in `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:259$45'.
+Found async reset \rst_n in `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:255$43'.
+Found async reset \rst_n in `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:115$19'.
+Found async reset \rst_n in `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:111$17'.
+Found async reset \rst_n in `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:107$15'.
+Found async reset \rst_n in `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:103$13'.
+Found async reset \rst_n in `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:99$11'.
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\signal_engine$top.u_signal_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:380$66'.
+     1/1: $0\signal_reg[31:0]
+Creating decoders for process `\signal_engine$top.u_signal_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:376$64'.
+     1/1: $0\out_valid[0:0]
+Creating decoders for process `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:263$47'.
+     1/1: $0\out_valid[0:0]
+Creating decoders for process `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:259$45'.
+     1/1: $0\kill_switch_reg[0:0]
+Creating decoders for process `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:255$43'.
+     1/1: $0\allow_trade_reg[0:0]
+Creating decoders for process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:115$19'.
+     1/1: $0\ret_reg[31:0]
+Creating decoders for process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:111$17'.
+     1/1: $0\prev_price[31:0]
+Creating decoders for process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:107$15'.
+     1/1: $0\out_valid[0:0]
+Creating decoders for process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:103$13'.
+     1/1: $0\ema_reg[31:0]
+Creating decoders for process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:99$11'.
+     1/1: $0\ema[31:0]
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\signal_engine$top.u_signal_engine.\signal_reg' using process `\signal_engine$top.u_signal_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:380$66'.
+  created $adff cell `$procdff$76' with positive edge clock and positive level reset.
+Creating register for signal `\signal_engine$top.u_signal_engine.\out_valid' using process `\signal_engine$top.u_signal_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:376$64'.
+  created $adff cell `$procdff$81' with positive edge clock and positive level reset.
+Creating register for signal `\risk_engine$top.u_risk_engine.\out_valid' using process `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:263$47'.
+  created $adff cell `$procdff$86' with positive edge clock and positive level reset.
+Creating register for signal `\risk_engine$top.u_risk_engine.\kill_switch_reg' using process `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:259$45'.
+  created $adff cell `$procdff$91' with positive edge clock and positive level reset.
+Creating register for signal `\risk_engine$top.u_risk_engine.\allow_trade_reg' using process `\risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:255$43'.
+  created $adff cell `$procdff$96' with positive edge clock and positive level reset.
+Creating register for signal `\feature_engine$top.u_feature_engine.\ret_reg' using process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:115$19'.
+  created $adff cell `$procdff$101' with positive edge clock and positive level reset.
+Creating register for signal `\feature_engine$top.u_feature_engine.\prev_price' using process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:111$17'.
+  created $adff cell `$procdff$106' with positive edge clock and positive level reset.
+Creating register for signal `\feature_engine$top.u_feature_engine.\out_valid' using process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:107$15'.
+  created $adff cell `$procdff$111' with positive edge clock and positive level reset.
+Creating register for signal `\feature_engine$top.u_feature_engine.\ema_reg' using process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:103$13'.
+  created $adff cell `$procdff$116' with positive edge clock and positive level reset.
+Creating register for signal `\feature_engine$top.u_feature_engine.\ema' using process `\feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:99$11'.
+  created $adff cell `$procdff$121' with positive edge clock and positive level reset.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `signal_engine$top.u_signal_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:380$66'.
+Removing empty process `signal_engine$top.u_signal_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:376$64'.
+Removing empty process `risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:263$47'.
+Removing empty process `risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:259$45'.
+Removing empty process `risk_engine$top.u_risk_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:255$43'.
+Removing empty process `feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:115$19'.
+Removing empty process `feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:111$17'.
+Removing empty process `feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:107$15'.
+Removing empty process `feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:103$13'.
+Removing empty process `feature_engine$top.u_feature_engine.$proc$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:99$11'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module signal_engine$top.u_signal_engine.
+<suppressed ~4 debug messages>
+Optimizing module risk_engine$top.u_risk_engine.
+<suppressed ~6 debug messages>
+Optimizing module feature_engine$top.u_feature_engine.
+<suppressed ~10 debug messages>
+
+2.3. Executing FUTURE pass.
+
+2.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module feature_engine$top.u_feature_engine.
+
+2.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Removed 23 unused cells and 142 unused wires.
+<suppressed ~26 debug messages>
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module feature_engine$top.u_feature_engine...
+Checking module risk_engine$top.u_risk_engine...
+Checking module signal_engine$top.u_signal_engine...
+Checking module top...
+Warning: Wire top.\out_data [31] is used but has no driver.
+Warning: Wire top.\out_data [30] is used but has no driver.
+Warning: Wire top.\out_data [29] is used but has no driver.
+Warning: Wire top.\out_data [28] is used but has no driver.
+Warning: Wire top.\out_data [27] is used but has no driver.
+Warning: Wire top.\out_data [26] is used but has no driver.
+Warning: Wire top.\out_data [25] is used but has no driver.
+Warning: Wire top.\out_data [24] is used but has no driver.
+Warning: Wire top.\out_data [23] is used but has no driver.
+Warning: Wire top.\out_data [22] is used but has no driver.
+Warning: Wire top.\out_data [21] is used but has no driver.
+Warning: Wire top.\out_data [20] is used but has no driver.
+Warning: Wire top.\out_data [19] is used but has no driver.
+Warning: Wire top.\out_data [18] is used but has no driver.
+Warning: Wire top.\out_data [17] is used but has no driver.
+Warning: Wire top.\out_data [16] is used but has no driver.
+Warning: Wire top.\out_data [15] is used but has no driver.
+Warning: Wire top.\out_data [14] is used but has no driver.
+Warning: Wire top.\out_data [13] is used but has no driver.
+Warning: Wire top.\out_data [12] is used but has no driver.
+Warning: Wire top.\out_data [11] is used but has no driver.
+Warning: Wire top.\out_data [10] is used but has no driver.
+Warning: Wire top.\out_data [9] is used but has no driver.
+Warning: Wire top.\out_data [8] is used but has no driver.
+Warning: Wire top.\out_data [7] is used but has no driver.
+Warning: Wire top.\out_data [6] is used but has no driver.
+Warning: Wire top.\out_data [5] is used but has no driver.
+Warning: Wire top.\out_data [4] is used but has no driver.
+Warning: Wire top.\out_data [3] is used but has no driver.
+Warning: Wire top.\out_data [2] is used but has no driver.
+Warning: Wire top.\out_data [1] is used but has no driver.
+Found and reported 31 problems.
+
+2.7. Executing OPT pass (performing simple optimizations).
+
+2.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+2.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 1 cells.
+
+2.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $ternary$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:123$26.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $ternary$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:266$49.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $ternary$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:385$70.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 3 multiplexer ports.
+<suppressed ~11 debug messages>
+
+2.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+2.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+2.7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~3 debug messages>
+
+2.7.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+2.7.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.7.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~11 debug messages>
+
+2.7.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+2.7.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+2.7.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+2.7.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+2.7.14. Finished OPT passes. (There is nothing left to do.)
+
+2.8. Executing WREDUCE pass (reducing word size of cells).
+Removed top 5 bits (of 32) from port B of cell feature_engine$top.u_feature_engine.$add$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:96$9 ($add).
+Removed top 13 bits (of 32) from port B of cell risk_engine$top.u_risk_engine.$gt$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:241$30 ($gt).
+Removed top 31 bits (of 32) from port B of cell risk_engine$top.u_risk_engine.$lt$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:250$39 ($lt).
+Converting cell risk_engine$top.u_risk_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:253$42 ($mul) from unsigned to signed.
+Removed top 32 bits (of 64) from port A of cell risk_engine$top.u_risk_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:253$42 ($mul).
+Removed top 32 bits (of 64) from port B of cell risk_engine$top.u_risk_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:253$42 ($mul).
+Removed top 16 bits (of 64) from port Y of cell risk_engine$top.u_risk_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:253$42 ($mul).
+Removed top 16 bits (of 64) from wire risk_engine$top.u_risk_engine._15_.
+Converting cell signal_engine$top.u_signal_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:373$62 ($mul) from unsigned to signed.
+Removed top 32 bits (of 64) from port A of cell signal_engine$top.u_signal_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:373$62 ($mul).
+Removed top 47 bits (of 64) from port B of cell signal_engine$top.u_signal_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:373$62 ($mul).
+Removed top 16 bits (of 64) from port Y of cell signal_engine$top.u_signal_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:373$62 ($mul).
+Converting cell signal_engine$top.u_signal_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:374$63 ($mul) from unsigned to signed.
+Removed top 32 bits (of 64) from port A of cell signal_engine$top.u_signal_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:374$63 ($mul).
+Removed top 48 bits (of 64) from port B of cell signal_engine$top.u_signal_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:374$63 ($mul).
+Removed top 16 bits (of 64) from port Y of cell signal_engine$top.u_signal_engine.$mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:374$63 ($mul).
+Removed top 16 bits (of 64) from wire signal_engine$top.u_signal_engine._09_.
+
+2.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~2 debug messages>
+
+2.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.11. Executing OPT pass (performing simple optimizations).
+
+2.11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+2.11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+2.11.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+2.11.4. Finished fast OPT passes.
+
+2.12. Printing statistics.
+
+=== feature_engine$top.u_feature_engine ===
+
+   Number of wires:                 31
+   Number of wire bits:            558
+   Number of public wires:          31
+   Number of public wire bits:     558
+   Number of ports:                  9
+   Number of port bits:            102
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 20
+     $add                            1
+     $adff                           5
+     $logic_and                      3
+     $logic_not                      1
+     $logic_or                       1
+     $mux                            6
+     $not                            1
+     $sub                            2
+
+=== risk_engine$top.u_risk_engine ===
+
+   Number of wires:                 32
+   Number of wire bits:            234
+   Number of public wires:          32
+   Number of public wire bits:     234
+   Number of ports:                 10
+   Number of port bits:             72
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 20
+     $adff                           3
+     $gt                             1
+     $logic_and                      3
+     $logic_not                      1
+     $logic_or                       1
+     $lt                             1
+     $mul                            1
+     $mux                            7
+     $neg                            1
+     $not                            1
+
+=== signal_engine$top.u_signal_engine ===
+
+   Number of wires:                 25
+   Number of wire bits:            414
+   Number of public wires:          25
+   Number of public wire bits:     414
+   Number of ports:                  9
+   Number of port bits:            102
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 14
+     $add                            1
+     $adff                           2
+     $logic_and                      3
+     $logic_not                      1
+     $logic_or                       1
+     $mul                            2
+     $mux                            3
+     $not                            1
+
+=== top ===
+
+   Number of wires:                 15
+   Number of wire bits:            170
+   Number of public wires:          15
+   Number of public wire bits:     170
+   Number of ports:                  8
+   Number of port bits:             70
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     feature_engine$top.u_feature_engine      1
+     risk_engine$top.u_risk_engine      1
+     signal_engine$top.u_signal_engine      1
+
+=== design hierarchy ===
+
+   top                               1
+     feature_engine$top.u_feature_engine      1
+     risk_engine$top.u_risk_engine      1
+     signal_engine$top.u_signal_engine      1
+
+   Number of wires:                103
+   Number of wire bits:           1376
+   Number of public wires:         103
+   Number of public wire bits:    1376
+   Number of ports:                 36
+   Number of port bits:            346
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 54
+     $add                            2
+     $adff                          10
+     $gt                             1
+     $logic_and                      9
+     $logic_not                      3
+     $logic_or                       3
+     $lt                             1
+     $mul                            3
+     $mux                           16
+     $neg                            1
+     $not                            3
+     $sub                            2
+
+2.13. Executing CHECK pass (checking for obvious problems).
+Checking module feature_engine$top.u_feature_engine...
+Checking module risk_engine$top.u_risk_engine...
+Checking module signal_engine$top.u_signal_engine...
+Checking module top...
+Warning: Wire top.\out_data [31] is used but has no driver.
+Warning: Wire top.\out_data [30] is used but has no driver.
+Warning: Wire top.\out_data [29] is used but has no driver.
+Warning: Wire top.\out_data [28] is used but has no driver.
+Warning: Wire top.\out_data [27] is used but has no driver.
+Warning: Wire top.\out_data [26] is used but has no driver.
+Warning: Wire top.\out_data [25] is used but has no driver.
+Warning: Wire top.\out_data [24] is used but has no driver.
+Warning: Wire top.\out_data [23] is used but has no driver.
+Warning: Wire top.\out_data [22] is used but has no driver.
+Warning: Wire top.\out_data [21] is used but has no driver.
+Warning: Wire top.\out_data [20] is used but has no driver.
+Warning: Wire top.\out_data [19] is used but has no driver.
+Warning: Wire top.\out_data [18] is used but has no driver.
+Warning: Wire top.\out_data [17] is used but has no driver.
+Warning: Wire top.\out_data [16] is used but has no driver.
+Warning: Wire top.\out_data [15] is used but has no driver.
+Warning: Wire top.\out_data [14] is used but has no driver.
+Warning: Wire top.\out_data [13] is used but has no driver.
+Warning: Wire top.\out_data [12] is used but has no driver.
+Warning: Wire top.\out_data [11] is used but has no driver.
+Warning: Wire top.\out_data [10] is used but has no driver.
+Warning: Wire top.\out_data [9] is used but has no driver.
+Warning: Wire top.\out_data [8] is used but has no driver.
+Warning: Wire top.\out_data [7] is used but has no driver.
+Warning: Wire top.\out_data [6] is used but has no driver.
+Warning: Wire top.\out_data [5] is used but has no driver.
+Warning: Wire top.\out_data [4] is used but has no driver.
+Warning: Wire top.\out_data [3] is used but has no driver.
+Warning: Wire top.\out_data [2] is used but has no driver.
+Warning: Wire top.\out_data [1] is used but has no driver.
+Found and reported 31 problems.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4. Executing SYNTH pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `top'. Setting top module to top.
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \feature_engine$top.u_feature_engine
+Used module:     \risk_engine$top.u_risk_engine
+Used module:     \signal_engine$top.u_signal_engine
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \feature_engine$top.u_feature_engine
+Used module:     \risk_engine$top.u_risk_engine
+Used module:     \signal_engine$top.u_signal_engine
+Removed 0 unused modules.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+<suppressed ~3 debug messages>
+Optimizing module top.
+
+4.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.5. Executing CHECK pass (checking for obvious problems).
+Checking module feature_engine$top.u_feature_engine...
+Checking module risk_engine$top.u_risk_engine...
+Checking module signal_engine$top.u_signal_engine...
+Checking module top...
+Warning: Wire top.\out_data [31] is used but has no driver.
+Warning: Wire top.\out_data [30] is used but has no driver.
+Warning: Wire top.\out_data [29] is used but has no driver.
+Warning: Wire top.\out_data [28] is used but has no driver.
+Warning: Wire top.\out_data [27] is used but has no driver.
+Warning: Wire top.\out_data [26] is used but has no driver.
+Warning: Wire top.\out_data [25] is used but has no driver.
+Warning: Wire top.\out_data [24] is used but has no driver.
+Warning: Wire top.\out_data [23] is used but has no driver.
+Warning: Wire top.\out_data [22] is used but has no driver.
+Warning: Wire top.\out_data [21] is used but has no driver.
+Warning: Wire top.\out_data [20] is used but has no driver.
+Warning: Wire top.\out_data [19] is used but has no driver.
+Warning: Wire top.\out_data [18] is used but has no driver.
+Warning: Wire top.\out_data [17] is used but has no driver.
+Warning: Wire top.\out_data [16] is used but has no driver.
+Warning: Wire top.\out_data [15] is used but has no driver.
+Warning: Wire top.\out_data [14] is used but has no driver.
+Warning: Wire top.\out_data [13] is used but has no driver.
+Warning: Wire top.\out_data [12] is used but has no driver.
+Warning: Wire top.\out_data [11] is used but has no driver.
+Warning: Wire top.\out_data [10] is used but has no driver.
+Warning: Wire top.\out_data [9] is used but has no driver.
+Warning: Wire top.\out_data [8] is used but has no driver.
+Warning: Wire top.\out_data [7] is used but has no driver.
+Warning: Wire top.\out_data [6] is used but has no driver.
+Warning: Wire top.\out_data [5] is used but has no driver.
+Warning: Wire top.\out_data [4] is used but has no driver.
+Warning: Wire top.\out_data [3] is used but has no driver.
+Warning: Wire top.\out_data [2] is used but has no driver.
+Warning: Wire top.\out_data [1] is used but has no driver.
+Found and reported 31 problems.
+
+4.6. Executing OPT pass (performing simple optimizations).
+
+4.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~11 debug messages>
+
+4.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+4.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.6.9. Finished OPT passes. (There is nothing left to do.)
+
+4.7. Executing FSM pass (extract and optimize FSM).
+
+4.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+4.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+4.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+4.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+4.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+4.8. Executing OPT pass (performing simple optimizations).
+
+4.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~11 debug messages>
+
+4.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+4.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$121 ($adff) from module feature_engine$top.u_feature_engine (D = \_10_, Q = \ema).
+Adding EN signal on $procdff$116 ($adff) from module feature_engine$top.u_feature_engine (D = \_10_, Q = \ema_reg).
+Adding EN signal on $procdff$111 ($adff) from module feature_engine$top.u_feature_engine (D = \_15_, Q = \out_valid).
+Adding EN signal on $procdff$106 ($adff) from module feature_engine$top.u_feature_engine (D = \price_in, Q = \prev_price).
+Adding EN signal on $procdff$101 ($adff) from module feature_engine$top.u_feature_engine (D = \_07_, Q = \ret_reg).
+Adding EN signal on $procdff$96 ($adff) from module risk_engine$top.u_risk_engine (D = \_04_, Q = \allow_trade_reg).
+Adding EN signal on $procdff$91 ($adff) from module risk_engine$top.u_risk_engine (D = \_02_, Q = \kill_switch_reg).
+Adding EN signal on $procdff$86 ($adff) from module risk_engine$top.u_risk_engine (D = \_20_, Q = \out_valid).
+Adding EN signal on $procdff$81 ($adff) from module signal_engine$top.u_signal_engine (D = \_14_, Q = \out_valid).
+Adding EN signal on $procdff$76 ($adff) from module signal_engine$top.u_signal_engine (D = \_01_, Q = \signal_reg).
+
+4.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+Removed 7 unused cells and 7 unused wires.
+<suppressed ~10 debug messages>
+
+4.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+<suppressed ~1 debug messages>
+Optimizing module risk_engine$top.u_risk_engine.
+<suppressed ~1 debug messages>
+Optimizing module signal_engine$top.u_signal_engine.
+<suppressed ~1 debug messages>
+Optimizing module top.
+
+4.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+4.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+4.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 1 cells.
+
+4.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+4.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+4.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.8.23. Finished OPT passes. (There is nothing left to do.)
+
+4.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 2 bits (of 32) from port B of cell signal_engine$top.u_signal_engine.$add$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:367$56 ($add).
+
+4.10. Executing PEEPOPT pass (run peephole optimizers).
+
+4.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module feature_engine$top.u_feature_engine:
+  creating $macc model for $add$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:96$9 ($add).
+  creating $macc model for $sub$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:94$7 ($sub).
+  creating $macc model for $sub$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:95$8 ($sub).
+  creating $alu model for $macc $sub$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:95$8.
+  creating $alu model for $macc $sub$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:94$7.
+  creating $alu model for $macc $add$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:96$9.
+  creating $alu cell for $add$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:96$9: $auto$alumacc.cc:495:replace_alu$140
+  creating $alu cell for $sub$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:94$7: $auto$alumacc.cc:495:replace_alu$143
+  creating $alu cell for $sub$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:95$8: $auto$alumacc.cc:495:replace_alu$146
+  created 3 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module risk_engine$top.u_risk_engine:
+  creating $macc model for $mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:253$42 ($mul).
+  creating $macc model for $neg$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:251$40 ($neg).
+  creating $alu model for $macc $neg$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:251$40.
+  creating $macc cell for $mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:253$42: $auto$alumacc.cc:365:replace_macc$149
+  creating $alu model for $gt$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:241$30 ($gt): new $alu
+  creating $alu model for $lt$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:250$39 ($lt): new $alu
+  creating $alu cell for $lt$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:250$39: $auto$alumacc.cc:495:replace_alu$152
+  creating $alu cell for $gt$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:241$30: $auto$alumacc.cc:495:replace_alu$159
+  creating $alu cell for $neg$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:251$40: $auto$alumacc.cc:495:replace_alu$172
+  created 3 $alu and 1 $macc cells.
+Extracting $alu and $macc cells in module signal_engine$top.u_signal_engine:
+  creating $macc model for $add$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:367$56 ($add).
+  creating $macc model for $mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:373$62 ($mul).
+  creating $alu model for $macc $add$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:367$56.
+  creating $macc cell for $mul$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:373$62: $auto$alumacc.cc:365:replace_macc$175
+  creating $alu cell for $add$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:367$56: $auto$alumacc.cc:495:replace_alu$176
+  created 1 $alu and 1 $macc cells.
+Extracting $alu and $macc cells in module top:
+  created 0 $alu and 0 $macc cells.
+
+4.13. Executing SHARE pass (SAT-based resource sharing).
+
+4.14. Executing OPT pass (performing simple optimizations).
+
+4.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+<suppressed ~5 debug messages>
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+4.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+4.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+Removed 2 unused cells and 9 unused wires.
+<suppressed ~4 debug messages>
+
+4.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $ternary$/app/eda.work/e0b47f6c-35cb-497d-b2ae-f07dc5a0a6b7.edacmd/eda.work/top.synth/slang/top.v:252$41: \position_in -> { 1'0 \position_in [30:0] }
+  Analyzing evaluation results.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+4.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+4.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.14.16. Finished OPT passes. (There is nothing left to do.)
+
+4.15. Executing MEMORY pass.
+
+4.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+4.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+4.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+4.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+4.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+4.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+4.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+4.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.17. Executing OPT pass (performing simple optimizations).
+
+4.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+<suppressed ~1 debug messages>
+Optimizing module risk_engine$top.u_risk_engine.
+<suppressed ~4 debug messages>
+Optimizing module signal_engine$top.u_signal_engine.
+<suppressed ~1 debug messages>
+Optimizing module top.
+<suppressed ~7 debug messages>
+
+4.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+Removed 0 unused cells and 21 unused wires.
+<suppressed ~3 debug messages>
+
+4.17.5. Finished fast OPT passes.
+
+4.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4.19. Executing OPT pass (performing simple optimizations).
+
+4.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+<suppressed ~1 debug messages>
+Optimizing module risk_engine$top.u_risk_engine.
+<suppressed ~1 debug messages>
+Optimizing module signal_engine$top.u_signal_engine.
+<suppressed ~1 debug messages>
+Optimizing module top.
+
+4.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \feature_engine$top.u_feature_engine..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \risk_engine$top.u_risk_engine..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \signal_engine$top.u_signal_engine..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~1 debug messages>
+
+4.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \feature_engine$top.u_feature_engine.
+  Optimizing cells in module \risk_engine$top.u_risk_engine.
+  Optimizing cells in module \signal_engine$top.u_signal_engine.
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+4.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+4.19.6. Executing OPT_SHARE pass.
+
+4.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+4.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.19.10. Finished OPT passes. (There is nothing left to do.)
+
+4.20. Executing TECHMAP pass (map to technology primitives).
+
+4.20.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+4.20.2. Continuing TECHMAP pass.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \ret_in * 3'011 (32x3 bits, signed)
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$26b3563f93a316657ddc1ad09b8a8d4fc5dc778e\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100010 for cells of type $fa.
+Using template $paramod$dbef6e48cd28208af1b77a9bd7dfc80580f16131\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100010 for cells of type $lcu.
+  add \abs_pos * \beta_in (32x32 bits, signed)
+Using template $paramod$c6baa65225090ac0a120feab1b920965244aa496\_90_alu for cells of type $alu.
+Using template $paramod$5ecc7864c1e67cef793c343884206cb7f6cf6821\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000110000 for cells of type $fa.
+Using template $paramod$88aad6f8473fb7e4e5fbfb8335ddebad03429eaa\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001111 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110000 for cells of type $lcu.
+Using template $paramod$2653f68ddb8eab7b1907b4a20767b72a824a7a36\_90_alu for cells of type $alu.
+Using template $paramod$43fe227a12dd926e62cd6d57bfac3b484afeb751\_90_alu for cells of type $alu.
+No more expansions possible.
+<suppressed ~2270 debug messages>
+
+4.21. Executing OPT pass (performing simple optimizations).
+
+4.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+<suppressed ~106 debug messages>
+Optimizing module risk_engine$top.u_risk_engine.
+<suppressed ~3466 debug messages>
+Optimizing module signal_engine$top.u_signal_engine.
+<suppressed ~306 debug messages>
+Optimizing module top.
+
+4.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+<suppressed ~96 debug messages>
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+<suppressed ~1560 debug messages>
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\top'.
+Removed a total of 553 cells.
+
+4.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+Removed 344 unused cells and 754 unused wires.
+<suppressed ~347 debug messages>
+
+4.21.5. Finished fast OPT passes.
+
+4.22. Executing ABC pass (technology mapping using ABC).
+
+4.22.1. Extracting gate netlist of module `\feature_engine$top.u_feature_engine' to `<abc-temp-dir>/input.blif'..
+Extracted 729 gates and 828 wires to a netlist network with 99 inputs and 68 outputs.
+
+4.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+4.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:            ANDNOT cells:      209
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:              NAND cells:       10
+ABC RESULTS:               NOR cells:       76
+ABC RESULTS:               NOT cells:       81
+ABC RESULTS:                OR cells:      133
+ABC RESULTS:             ORNOT cells:       43
+ABC RESULTS:              XNOR cells:       17
+ABC RESULTS:               XOR cells:      167
+ABC RESULTS:        internal signals:      661
+ABC RESULTS:           input signals:       99
+ABC RESULTS:          output signals:       68
+Removing temp directory.
+
+4.22.2. Extracting gate netlist of module `\risk_engine$top.u_risk_engine' to `<abc-temp-dir>/input.blif'..
+Extracted 5830 gates and 5898 wires to a netlist network with 67 inputs and 6 outputs.
+
+4.22.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+4.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      167
+ABC RESULTS:            ANDNOT cells:     2247
+ABC RESULTS:               MUX cells:       31
+ABC RESULTS:              NAND cells:       28
+ABC RESULTS:               NOR cells:      475
+ABC RESULTS:               NOT cells:      211
+ABC RESULTS:                OR cells:      598
+ABC RESULTS:             ORNOT cells:      297
+ABC RESULTS:              XNOR cells:      685
+ABC RESULTS:               XOR cells:     1208
+ABC RESULTS:        internal signals:     5825
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+4.22.3. Extracting gate netlist of module `\signal_engine$top.u_signal_engine' to `<abc-temp-dir>/input.blif'..
+Extracted 514 gates and 579 wires to a netlist network with 65 inputs and 36 outputs.
+
+4.22.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+4.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       29
+ABC RESULTS:            ANDNOT cells:      124
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:              NAND cells:       11
+ABC RESULTS:               NOR cells:       53
+ABC RESULTS:               NOT cells:       15
+ABC RESULTS:                OR cells:       93
+ABC RESULTS:             ORNOT cells:       46
+ABC RESULTS:              XNOR cells:       38
+ABC RESULTS:               XOR cells:      116
+ABC RESULTS:        internal signals:      478
+ABC RESULTS:           input signals:       65
+ABC RESULTS:          output signals:       36
+Removing temp directory.
+
+4.22.4. Extracting gate netlist of module `\top' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+4.23. Executing OPT pass (performing simple optimizations).
+
+4.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module feature_engine$top.u_feature_engine.
+Optimizing module risk_engine$top.u_risk_engine.
+<suppressed ~30 debug messages>
+Optimizing module signal_engine$top.u_signal_engine.
+Optimizing module top.
+
+4.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\feature_engine$top.u_feature_engine'.
+Finding identical cells in module `\risk_engine$top.u_risk_engine'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\signal_engine$top.u_signal_engine'.
+Finding identical cells in module `\top'.
+Removed a total of 4 cells.
+
+4.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+Removed 0 unused cells and 1250 unused wires.
+<suppressed ~9 debug messages>
+
+4.23.5. Finished fast OPT passes.
+
+4.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `top'. Setting top module to top.
+
+4.24.1. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \feature_engine$top.u_feature_engine
+Used module:     \risk_engine$top.u_risk_engine
+Used module:     \signal_engine$top.u_signal_engine
+
+4.24.2. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \feature_engine$top.u_feature_engine
+Used module:     \risk_engine$top.u_risk_engine
+Used module:     \signal_engine$top.u_signal_engine
+Removed 0 unused modules.
+
+4.25. Printing statistics.
+
+=== feature_engine$top.u_feature_engine ===
+
+   Number of wires:                693
+   Number of wire bits:           1034
+   Number of public wires:          20
+   Number of public wire bits:     361
+   Number of ports:                  9
+   Number of port bits:            102
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                837
+     $_ANDNOT_                     209
+     $_AND_                          3
+     $_DFFE_PN0P_                   97
+     $_MUX_                          1
+     $_NAND_                        10
+     $_NOR_                         76
+     $_NOT_                         81
+     $_ORNOT_                       43
+     $_OR_                         133
+     $_XNOR_                        17
+     $_XOR_                        167
+
+=== risk_engine$top.u_risk_engine ===
+
+   Number of wires:               5958
+   Number of wire bits:           6051
+   Number of public wires:          20
+   Number of public wire bits:     113
+   Number of ports:                 10
+   Number of port bits:             72
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               5946
+     $_ANDNOT_                    2244
+     $_AND_                        167
+     $_DFFE_PN0P_                    3
+     $_MUX_                         31
+     $_NAND_                        28
+     $_NOR_                        474
+     $_NOT_                        211
+     $_ORNOT_                      297
+     $_OR_                         598
+     $_XNOR_                       685
+     $_XOR_                       1208
+
+=== signal_engine$top.u_signal_engine ===
+
+   Number of wires:                507
+   Number of wire bits:            724
+   Number of public wires:          16
+   Number of public wire bits:     233
+   Number of ports:                  9
+   Number of port bits:            102
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                559
+     $_ANDNOT_                     124
+     $_AND_                         29
+     $_DFFE_PN0P_                   33
+     $_MUX_                          1
+     $_NAND_                        11
+     $_NOR_                         53
+     $_NOT_                         15
+     $_ORNOT_                       46
+     $_OR_                          93
+     $_XNOR_                        38
+     $_XOR_                        116
+
+=== top ===
+
+   Number of wires:                 15
+   Number of wire bits:            170
+   Number of public wires:          15
+   Number of public wire bits:     170
+   Number of ports:                  8
+   Number of port bits:             70
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     feature_engine$top.u_feature_engine      1
+     risk_engine$top.u_risk_engine      1
+     signal_engine$top.u_signal_engine      1
+
+=== design hierarchy ===
+
+   top                               1
+     feature_engine$top.u_feature_engine      1
+     risk_engine$top.u_risk_engine      1
+     signal_engine$top.u_signal_engine      1
+
+   Number of wires:               7173
+   Number of wire bits:           7979
+   Number of public wires:          71
+   Number of public wire bits:     877
+   Number of ports:                 36
+   Number of port bits:            346
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               7342
+     $_ANDNOT_                    2577
+     $_AND_                        199
+     $_DFFE_PN0P_                  133
+     $_MUX_                         33
+     $_NAND_                        49
+     $_NOR_                        603
+     $_NOT_                        307
+     $_ORNOT_                      386
+     $_OR_                         824
+     $_XNOR_                       740
+     $_XOR_                       1491
+
+4.26. Executing CHECK pass (checking for obvious problems).
+Checking module feature_engine$top.u_feature_engine...
+Checking module risk_engine$top.u_risk_engine...
+Checking module signal_engine$top.u_signal_engine...
+Checking module top...
+Found and reported 0 problems.
+
+5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \feature_engine$top.u_feature_engine..
+Finding unused cells or wires in module \risk_engine$top.u_risk_engine..
+Finding unused cells or wires in module \signal_engine$top.u_signal_engine..
+Finding unused cells or wires in module \top..
+
+6. Executing Verilog backend.
+
+6.1. Executing BMUXMAP pass.
+
+6.2. Executing DEMUXMAP pass.
+Dumping module `\feature_engine$top.u_feature_engine'.
+Dumping module `\risk_engine$top.u_risk_engine'.
+Dumping module `\signal_engine$top.u_signal_engine'.
+Dumping module `\top'.
+
+7. Executing JSON backend.
+
+Warnings: 31 unique messages, 93 total
+End of script. Logfile hash: 23a266fc08, CPU: user 0.86s system 0.01s, MEM: 45.55 MB peak
+Yosys 0.53 (git sha1 53c22ab7c, g++ 13.3.0-6ubuntu2~24.04 -fPIC -O3)
+Time spent: 37% 1x abc (0 sec), 15% 31x opt_expr (0 sec), ...
+INFO: [UNKNOWN] subprocess_run_background: returncode=0
