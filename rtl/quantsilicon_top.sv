@@ -67,6 +67,10 @@ module quantsilicon_top (
     logic                risk_buf_valid;
     logic                risk_buf_allow;
     logic                risk_buf_kill;
+    // Indicates when both branches are valid and output is being consumed
+logic consuming;
+assign consuming = signal_buf_valid && risk_buf_valid && out_ready;
+
 
     // =========================================================================
     // Input Distribution & Handshake
@@ -95,51 +99,92 @@ module quantsilicon_top (
     // Output Branch Buffering Logic
     // =========================================================================
     // Signal branch buffer: latch when signal_engine produces output
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            signal_buf_valid <= 1'b0;
-            signal_buf_data <= 32'sd0;
-        end else begin
-            // Load buffer when signal output arrives and buffer is empty
-            if (sig_out_valid && sig_out_ready && !signal_buf_valid) begin
-                signal_buf_valid <= 1'b1;
-                signal_buf_data <= sig_signal_out;
-            end
+   // always_ff @(posedge clk or negedge rst_n) begin
+   //     if (!rst_n) begin
+     //       signal_buf_valid <= 1'b0;
+       //     signal_buf_data <= 32'sd0;
+       // end else begin
+         //   // Load buffer when signal output arrives and buffer is empty
+           // if (sig_out_valid && sig_out_ready && !signal_buf_valid) begin
+             //   signal_buf_valid <= 1'b1;
+             //   signal_buf_data <= sig_signal_out;
+    //        end
             // Clear buffer when both branches ready and top consumes
-            else if (signal_buf_valid && risk_buf_valid && out_ready) begin
-                signal_buf_valid <= 1'b0;
-            end
-        end
+      //      else if (signal_buf_valid && risk_buf_valid && out_ready) begin
+        //        signal_buf_valid <= 1'b0;
+       //     end
+     //   end
+   // end
+  always_ff @(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
+    signal_buf_valid <= 1'b0;
+    signal_buf_data  <= 32'sd0;
+  end else begin
+    // Pop happens when consuming
+    // Push happens when sig_out_valid && sig_out_ready
+    //
+    // IMPORTANT: allow push even if buffer was full, as long as we're consuming.
+    if (sig_out_valid && sig_out_ready) begin
+      signal_buf_valid <= 1'b1;          // stays full (refilled) or becomes full
+      signal_buf_data  <= sig_signal_out;
+    end else if (consuming) begin
+      signal_buf_valid <= 1'b0;          // consumed with no refill
     end
+    // else HOLD
+  end
+end
+
 
     // Risk branch buffer: latch when risk_engine produces output
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            risk_buf_valid <= 1'b0;
-            risk_buf_allow <= 1'b0;
-            risk_buf_kill <= 1'b0;
-        end else begin
-            // Load buffer when risk output arrives and buffer is empty
-            if (risk_out_valid && risk_out_ready && !risk_buf_valid) begin
-                risk_buf_valid <= 1'b1;
-                risk_buf_allow <= risk_allow_trade;
-                risk_buf_kill <= risk_kill_switch;
-            end
+//    always_ff @(posedge clk or negedge rst_n) begin
+  //      if (!rst_n) begin
+    //        risk_buf_valid <= 1'b0;
+      //      risk_buf_allow <= 1'b0;
+        //    risk_buf_kill <= 1'b0;
+  //      end else begin
+    //        // Load buffer when risk output arrives and buffer is empty
+      //      if (risk_out_valid && risk_out_ready && !risk_buf_valid) begin
+        //        risk_buf_valid <= 1'b1;
+          //      risk_buf_allow <= risk_allow_trade;
+            //    risk_buf_kill <= risk_kill_switch;
+           // end
             // Clear buffer when both branches ready and top consumes
-            else if (risk_buf_valid && signal_buf_valid && out_ready) begin
-                risk_buf_valid <= 1'b0;
-            end
-        end
+    //        else if (risk_buf_valid && signal_buf_valid && out_ready) begin
+      //          risk_buf_valid <= 1'b0;
+       //     end
+   //     end
+   // end
+  always_ff @(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
+    risk_buf_valid <= 1'b0;
+    risk_buf_allow <= 1'b0;
+    risk_buf_kill  <= 1'b0;
+  end else begin
+    if (risk_out_valid && risk_out_ready) begin
+      risk_buf_valid <= 1'b1;
+      risk_buf_allow <= risk_allow_trade;
+      risk_buf_kill  <= risk_kill_switch;
+    end else if (consuming) begin
+      risk_buf_valid <= 1'b0;
     end
+    // else HOLD
+  end
+end
+
 
     // =========================================================================
     // Output Ready Signals to Submodules
     // =========================================================================
     // Each engine can advance when its buffer is empty or when top output is being consumed
-    assign sig_out_ready = !signal_buf_valid || (out_valid && out_ready);
+    //assign sig_out_ready = !signal_buf_valid || (out_valid && out_ready);
 
     // Risk engine can advance when its buffer is empty or when top output is being consumed
-    assign risk_out_ready = !risk_buf_valid || (out_valid && out_ready);
+    //assign risk_out_ready = !risk_buf_valid || (out_valid && out_ready);
+    // True when top-level output is being consum
+
+    // Submodules can advance when their buffer is empty OR when we consume this cycle
+    assign sig_out_ready  = !signal_buf_valid || consuming;
+    assign risk_out_ready = !risk_buf_valid   || consuming;
 
     // =========================================================================
     // Top-Level Output Composition
