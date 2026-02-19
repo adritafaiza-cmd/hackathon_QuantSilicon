@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 // quantsilicon_top.sv
 // Top-level integration of QuantSilicon V1 trading pipeline
 // Combines feature extraction, signal generation, and risk management

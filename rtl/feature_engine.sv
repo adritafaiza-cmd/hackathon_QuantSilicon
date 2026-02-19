@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 // feature_engine.sv
 // Streaming feature extraction module with Q16.16 fixed-point arithmetic
 // Computes return (price difference) and exponential moving average (EMA)

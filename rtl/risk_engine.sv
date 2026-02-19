@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 // risk_engine.sv
 // Risk management module with Q16.16 fixed-point arithmetic
 // Monitors position exposure and generates trading control signals

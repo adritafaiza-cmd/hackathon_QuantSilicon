@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 // rtl/fxp_pkg.sv
 
 package fxp_pkg;

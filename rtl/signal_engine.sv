@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 // signal_engine.sv
 // Signal generation module with Q16.16 fixed-point arithmetic
 // Computes weighted combination of return and EMA features
