@@ -95,62 +95,49 @@ module quantsilicon_top (
     // Output Branch Buffering Logic
     // =========================================================================
     // Signal branch buffer: latch when signal_engine produces output
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            signal_buf_valid <= 1'b0;
-            signal_buf_data <= 32'sd0;
-        end else begin
-            // Load buffer when signal output arrives and buffer is empty
-            if (sig_out_valid && sig_out_ready && !signal_buf_valid) begin
-                signal_buf_valid <= 1'b1;
-                signal_buf_data <= sig_signal_out;
-            end
-            // Clear buffer when both branches ready and top consumes
-            else if (signal_buf_valid && risk_buf_valid && out_ready) begin
-                signal_buf_valid <= 1'b0;
-            end
-        end
+    // Ready to accept from engines if buffer empty OR if we're popping this cycle
+wire pop = out_valid && out_ready;
+
+assign sig_out_ready  = !signal_buf_valid || pop;
+assign risk_out_ready = !risk_buf_valid   || pop;
+
+// Signal buffer
+always_ff @(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
+    signal_buf_valid <= 1'b0;
+    signal_buf_data  <= '0;
+  end else begin
+    if (sig_out_valid && sig_out_ready) begin
+      signal_buf_valid <= 1'b1;
+      signal_buf_data  <= sig_signal_out;
+    end else if (pop) begin
+      signal_buf_valid <= 1'b0;
     end
+  end
+end
 
-    // Risk branch buffer: latch when risk_engine produces output
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            risk_buf_valid <= 1'b0;
-            risk_buf_allow <= 1'b0;
-            risk_buf_kill <= 1'b0;
-        end else begin
-            // Load buffer when risk output arrives and buffer is empty
-            if (risk_out_valid && risk_out_ready && !risk_buf_valid) begin
-                risk_buf_valid <= 1'b1;
-                risk_buf_allow <= risk_allow_trade;
-                risk_buf_kill <= risk_kill_switch;
-            end
-            // Clear buffer when both branches ready and top consumes
-            else if (risk_buf_valid && signal_buf_valid && out_ready) begin
-                risk_buf_valid <= 1'b0;
-            end
-        end
+// Risk buffer
+always_ff @(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
+    risk_buf_valid <= 1'b0;
+    risk_buf_allow <= 1'b0;
+    risk_buf_kill  <= 1'b0;
+  end else begin
+    if (risk_out_valid && risk_out_ready) begin
+      risk_buf_valid <= 1'b1;
+      risk_buf_allow <= risk_allow_trade;
+      risk_buf_kill  <= risk_kill_switch;
+    end else if (pop) begin
+      risk_buf_valid <= 1'b0;
     end
+  end
+end
 
-    // =========================================================================
-    // Output Ready Signals to Submodules
-    // =========================================================================
-    // Each engine can advance when its buffer is empty or when top output is being consumed
-    assign sig_out_ready = !signal_buf_valid || (out_valid && out_ready);
+assign out_valid    = signal_buf_valid && risk_buf_valid;
+assign signal_out   = signal_buf_data;
+assign allow_trade  = risk_buf_allow;
+assign kill_switch  = risk_buf_kill;
 
-    // Risk engine can advance when its buffer is empty or when top output is being consumed
-    assign risk_out_ready = !risk_buf_valid || (out_valid && out_ready);
-
-    // =========================================================================
-    // Top-Level Output Composition
-    // =========================================================================
-    // Output valid when both branches have produced results (both buffers full)
-    assign out_valid = signal_buf_valid && risk_buf_valid;
-    
-    // Present buffered outputs
-    assign signal_out = signal_buf_data;
-    assign allow_trade = risk_buf_allow;
-    assign kill_switch = risk_buf_kill;
 
     // =========================================================================
     // Submodule Instantiations

@@ -1,0 +1,8 @@
+top:
+  deps:
+    - rtl/fxp_pkg.sv
+    - rtl/feature_engine.sv
+    - rtl/signal_engine.sv
+    - rtl/risk_engine.sv
+    - rtl/top.sv
+  top: top
