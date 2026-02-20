@@ -1,299 +1,273 @@
-# QuantSilicon v2 – Design Specification
+# QuantSilicon V1 — Design Specification
+
+## 1. Overview
+
+QuantSilicon is a streaming hardware pipeline designed to accelerate lightweight quantitative trading signal generation and risk evaluation using fixed-point arithmetic.
+
+The system processes market data tick-by-tick and produces:
+
+- Trading signal (Q16.16 fixed-point)
+- Risk decision outputs:
+  - `allow_trade`
+  - `kill_switch`
+
+The design targets low-latency execution and deterministic behavior suitable for hardware deployment.
 
 ---
 
-## 1. Numeric Representation
+## 2. Design Goals
 
-All signals use signed **Q16.16 fixed-point format**.
+### Primary Objectives
+- Deterministic low-latency streaming pipeline
+- Fixed-point arithmetic for hardware efficiency
+- Modular RTL blocks with clear interfaces
+- Backpressure-safe ready/valid handshaking
+- Risk-aware signal generation
 
-- Total width: 32 bits
-- Integer bits: 16
-- Fraction bits: 16
-- Scaling factor: 2^16 = 65536
-
-### Conversion
-
-```text
-real_to_fxp(x) = round(x × 65536)
-fxp_to_real(v) = v / 65536
-```
-
-### Multiplication Rule
-
-```text
-Q16.16 × Q16.16 → Q32.32
-result = (a * b) >>> 16
-```
-
-All right shifts must be arithmetic shifts (`>>>`).
+### Constraints
+- Q16.16 fixed-point format
+- Streaming architecture (no large buffers)
+- Synthesizable RTL
+- Simple verification-friendly logic
 
 ---
 
-## 2. Inputs (Per Tick)
+## 3. System Architecture
 
-All inputs are signed Q16.16.
+Pipeline structure:
 
-```text
-price[t]
-position[t]
-beta[t]
-```
+Input Stream
+│
+▼
+Feature Engine
+(ret, EMA extraction)
+│
+▼
+Signal Engine
+(weighted signal generation)
+│
+▼
+Output Alignment
+▲
+│
+Risk Engine
+(exposure + kill logic)
 
----
+### Data Flow
 
-## 3. Internal State Registers
+Input tick provides:
 
-All signed Q16.16 unless specified.
+- `price`
+- `position`
+- `beta`
 
-```text
-prev_price
-ema_fast
-ema_slow
-mu
-var
-pos_ema
-```
+Two parallel branches operate:
 
----
+1. **Signal Branch**
+   - Feature extraction
+   - Signal computation
 
-## 4. Feature Computation
+2. **Risk Branch**
+   - Exposure computation
+   - Risk decision
 
-### 4.1 Return
-
-```text
-ret[t] = price[t] - prev_price
-prev_price_next = price[t]
-```
-
----
-
-### 4.2 Dual EMA Trend
-
-```text
-ema_fast_next = ema_fast + ((ret[t] - ema_fast) >>> AF)
-ema_slow_next = ema_slow + ((ret[t] - ema_slow) >>> AS)
-trend[t] = ema_fast_next - ema_slow_next
-```
-
-Constants:
-
-```text
-AF = 3   (alpha_fast = 1/8)
-AS = 6   (alpha_slow = 1/64)
-```
+Outputs are aligned before being emitted.
 
 ---
 
-### 4.3 EWMA Mean of Returns
+## 4. Mathematical Model (V1)
 
-```text
-mu_next = mu + ((ret[t] - mu) >>> AM)
-demean[t] = ret[t] - mu_next
-```
+### Inputs (per tick)
+- `price` (Q16.16)
+- `position` (Q16.16)
+- `beta` (Q16.16)
 
-Constant:
+### Feature Extraction
 
-```text
-AM = 5   (alpha_mean = 1/32)
-```
+ret = price - prev_price
+ema = ema + ((ret - ema) >> ALPHA_SHIFT)
 
----
+Where:
 
-### 4.4 EWMA Variance
-
-```text
-var_next = var + (((demean[t] * demean[t]) >>> 16 - var) >>> AV)
-```
-
-Constant:
-
-```text
-AV = 5   (alpha_var = 1/32)
-```
-
-Volatility approximation:
-
-```text
-vol[t] ≈ sqrt(var_next)
-inv_vol[t] ≈ 1 / (vol[t] + eps)
-```
+ALPHA_SHIFT = 5  (alpha = 1/32)
 
 ---
 
-## 5. Signal Model
+### Signal Model
 
-### 5.1 Z-Score
+signal = w1 * ret + w2 * ema
 
-```text
-zscore[t] = (demean[t] * inv_vol[t]) >>> 16
-```
+Constants (Q16.16):
 
-### 5.2 Raw Multi-Factor Signal
+| Parameter | Real | Fixed |
+|---|---|---|
+| w1 | 0.75 | 49152 |
+| w2 | 0.25 | 16384 |
 
-```text
-signal_raw[t] =
-    ((trend[t] * wT) >>> 16)
-  - ((zscore[t] * wZ) >>> 16)
-```
+Multiplication uses:
 
-### 5.3 Volatility-Scaled Signal
-
-```text
-signal[t] = (signal_raw[t] * inv_vol[t]) >>> 16
-```
+fxp_mul_q16(a,b)
 
 ---
 
-## 6. Risk Model
+### Risk Model
 
-### 6.1 Smoothed Position
+Exposure:
 
-```text
-pos_ema_next = pos_ema + ((position[t] - pos_ema) >>> AP)
-```
+expo = abs(position) * beta
 
-Constant:
+Decision:
 
-```text
-AP = 4   (alpha_pos = 1/16)
-```
-
----
-
-### 6.2 Beta-Weighted Exposure
-
-```text
-abs_pos = (pos_ema_next < 0) ? -pos_ema_next : pos_ema_next
-expo_beta[t] = (abs_pos * beta[t]) >>> 16
-```
-
----
-
-### 6.3 Volatility-Adjusted Exposure
-
-```text
-expo_risk[t] =
-    (expo_beta[t] * (1 + ((kV * vol[t]) >>> 16))) >>> 16
-```
-
----
-
-### 6.4 Kill Condition
-
-```text
-if expo_risk[t] > LIMIT:
-    kill_switch = 1
-    allow_trade = 0
-    signal_out = 0
+if expo > LIMIT:
+kill_switch = 1
+allow_trade = 0
 else:
-    kill_switch = 0
-    allow_trade = 1
-    signal_out = signal[t]
-```
+kill_switch = 0
+allow_trade = 1
+
+Risk threshold:
+
+LIMIT = 2.0  → 131072 (Q16.16)
 
 ---
 
-## 7. Frozen Constants (Q16.16)
+## 5. Fixed-Point Representation
 
-```text
-wT = 0.75   → 49152
-wZ = 0.25   → 16384
-kV = 0.50   → 32768
-LIMIT = 2.0 → 131072
-eps = 0.01  → 655
-```
-
----
-
-## 8. Interface Protocol
-
-Streaming ready/valid handshake.
-
-```text
-Input accepted when:
-in_valid && in_ready
-
-Output consumed when:
-out_valid && out_ready
-```
-
-Outputs per tick:
-
-```text
-signal_out (Q16.16)
-allow_trade (1 bit)
-kill_switch (1 bit)
-```
-
-## Streaming Interface
-Ready/valid protocol is defined in `docs/STREAMING_INTERFACE.md` and is mandatory for all RTL modules.
-
-
-
-## Streaming Interface Contract (Ready/Valid)
-
-All modules follow ready/valid handshake semantics.
-
-### Input Handshake
-A transaction is accepted when:
-
-```text
-in_valid && in_ready
-
-
----
-
-## 9. Latency Target
-
-```text
-Deterministic bounded latency ≤ 5 cycles
-Target throughput: 1 sample per cycle (if pipelined)
-```
-
----
-
-
-
-
-## Fixed-Point Implementation Rules (Q16.16)
-
-All values are signed Q16.16 stored as 32-bit signed integers.
+QuantSilicon uses **Q16.16 signed fixed-point**.
 
 Conversion:
-- X_fixed = round(X * 65536)
-- X_real = X_fixed / 65536
 
-Multiplication:
-- If a and b are Q16.16, compute 64-bit product p = a*b (Q32.32)
-- Rescale back to Q16.16 using:
-  p_q16 = p >>> 16
+X_fixed = round(X_real * 65536)
+X_real  = X_fixed / 65536
 
-Absolute value:
-- abs(x) = (x < 0) ? -x : x
+### Rationale
+- Avoid floating-point hardware cost
+- Deterministic arithmetic
+- Easy scaling and verification
 
-Frozen constants (Q16.16 integers):
-- wT = 49152
-- wZ = 16384
-- kV = 32768
-- LIMIT = 131072
-- eps = 655
+---
 
+## 6. Streaming Interface Specification
 
+All modules follow ready/valid protocol.
 
+### Input Stream
 
+| Signal | Description |
+|---|---|
+| in_valid | Input sample valid |
+| in_ready | Module ready to accept |
+| price | Price input |
+| position | Position input |
+| beta | Beta input |
 
-## Frozen Architectural Constants (V1)
+### Output Stream
 
-These parameters are frozen for QuantSilicon V1 and must not be modified without a version bump.
+| Signal | Description |
+|---|---|
+| out_valid | Output data valid |
+| out_ready | Consumer ready |
+| signal_out | Trading signal |
+| allow_trade | Risk permission |
+| kill_switch | Risk shutdown |
 
-```text
-ALPHA_SHIFT = 5          (alpha = 1/32)
+### Handshake Contract
 
-W1 = 49152               (0.75 in Q16.16)
-W2 = 16384               (0.25 in Q16.16)
+Transfer occurs when:
+valid && ready == 1
 
-LIMIT = 131072           (2.0 in Q16.16)
+---
 
+## 7. Module Breakdown
 
+### 7.1 Feature Engine
+Responsibilities:
+- Compute return
+- Compute EMA
+- Maintain state (prev_price, ema)
 
+Outputs:
+- `ret`
+- `ema`
 
+---
+
+### 7.2 Signal Engine
+Responsibilities:
+- Weighted fixed-point multiply
+- Signal accumulation
+
+Formula:
+
+signal = w1ret + w2ema
+
+---
+
+### 7.3 Risk Engine
+Responsibilities:
+- Compute exposure
+- Compare against limit
+- Generate kill logic
+
+---
+
+### 7.4 Top-Level Integration
+Responsibilities:
+- Align parallel branches
+- Buffer outputs
+- Maintain handshake correctness
+- Prevent deadlock under backpressure
+
+---
+
+## 8. Latency Target
+
+Target latency:
+
+≤ 5 cycles (pipeline steady state)
+
+Actual latency depends on:
+- buffering
+- backpressure events
+- pipeline depth
+
+---
+
+## 9. AI-Assisted Design Workflow
+
+This project uses AI-assisted RTL generation via CogniChip and LLM-based design iteration.
+
+AI usage included:
+
+- RTL skeleton generation
+- Interface drafting
+- Fixed-point utility generation
+- Design iteration and refinement
+
+All generated RTL was manually reviewed for:
+- handshake correctness
+- fixed-point scaling safety
+- synthesizability
+
+---
+
+## 10. Future Improvements (V2)
+
+Potential extensions:
+
+- Volatility-aware weighting
+- Adaptive alpha (dynamic EMA)
+- Multi-asset pipeline
+- Hardware risk aggregation
+- Parallel signal lanes
+
+---
+
+## 11. Summary
+
+QuantSilicon V1 demonstrates a complete streaming quant pipeline in synthesizable RTL combining:
+
+- Signal generation
+- Risk management
+- Fixed-point arithmetic
+- AI-assisted hardware development
